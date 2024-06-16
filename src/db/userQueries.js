@@ -59,7 +59,31 @@ const getUserById = async(id) => {
     }
 }
 
+const updateProfilePhoto = async(id, url) => {
+    const query = `UPDATE database2.users
+                    SET profile_picture=?
+                    WHERE id=?`;
+    
+    try {
+        const[rows] = await pool.query(query, [url, id]);
+
+        return {
+            status: 'success',
+            message: 'successfull',
+            data: rows,
+        }
+    } catch(err) {
+        console.error('Error updataing profile photo in database: ' + err);
+
+        return {
+            status: 'error',
+            message: 'Error updating profile photo in database',
+        }
+    }
+}
+
 module.exports = {
     createUser,
-    getUserById
+    getUserById,
+    updateProfilePhoto
 }

@@ -16,11 +16,24 @@ const s3 = new S3({
 // uplpoads file to s3
 function uploadFile(file) {
     const fileStream = fs.createReadStream(file.path);
-    console.log(file.fileName)
+    
     const uploadParams = {
         Bucket: bucketName,
         Body: fileStream,
         Key: file.filename,
+    }
+
+    return s3.upload(uploadParams).promise();
+}
+
+function uploadFile2(fileBuffer, filename, fileType) {
+    const uniqueFileName = filename + Date.now();
+    
+    const uploadParams = {
+        Bucket: bucketName,
+        Body: fileBuffer,
+        Key: uniqueFileName,
+        ContentType: fileType,
     }
 
     return s3.upload(uploadParams).promise();
@@ -40,5 +53,6 @@ function getFileStream(fileKey) {
 
 module.exports ={
     uploadFile,
+    uploadFile2,
     getFileStream,
 }

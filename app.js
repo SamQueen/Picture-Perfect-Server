@@ -7,7 +7,8 @@ const feedRoute = require('./src/routes/feed');
 const loggedInUserRoute = require('./src/routes/loggedInUser');
 const createUserRoute = require('./src/routes/createUser');
 const postsRoute = require('./src/routes/getPostsById');
-const likesRoute = require('./src/routes/like')
+const likesRoute = require('./src/routes/like');
+const editProfileRoute = require('./src/routes/editProfile');
 const createPostRoute = require('./src/routes/createPost');
 
 const app = express()
@@ -33,6 +34,7 @@ app.use('/', createUserRoute);
 app.use('/', postsRoute);
 app.use('/', likesRoute);
 app.use('/', createPostRoute);
+app.use('/', editProfileRoute);
 
 app.get('/', (req, res) => {
   res.send('Hello World!')
