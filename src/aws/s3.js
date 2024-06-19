@@ -1,4 +1,6 @@
 require('dotenv').config();
+const { parse } = require('url');
+const url = require('url');
 const S3 = require('aws-sdk/clients/s3');
 const fs = require('fs');
 
@@ -39,6 +41,24 @@ function uploadFile2(fileBuffer, filename, fileType) {
     return s3.upload(uploadParams).promise();
 }
 
+async function deleteFile(url) {
+    const parsedUrl = new URL(url);
+    const pathParts = parsedUrl.pathname.split('/');
+    const key = pathParts.slice(1).join('/');
+    
+    const params = {
+        Bucket: bucketName,
+        Key: key,
+    };
+
+    try {
+        await s3.deleteObject(params).promise();
+        console.log("File deleted from s3 bucket")
+    } catch(err) {
+        console.error("Error deleteing file from s3 bucket: ", err);
+    }
+}
+
 
 // downloads file from s3
 function getFileStream(fileKey) {
@@ -55,4 +75,5 @@ module.exports ={
     uploadFile,
     uploadFile2,
     getFileStream,
+    deleteFile,
 }
