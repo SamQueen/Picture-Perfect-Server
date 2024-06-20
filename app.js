@@ -13,7 +13,7 @@ const createPostRoute = require('./src/routes/createPost');
 const deletePostRoute = require('./src/routes/deletePost');
 
 const app = express()
-const port = 5000
+const port = process.env.PORT || 5000;
 
 // Allow all origins (not recommended for production)
 app.use(cors({
