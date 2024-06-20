@@ -8,6 +8,7 @@ router.get('/feed' , async (req, res) => {
   
   try {
     const allPosts = await getAllPosts(user_id);
+    
     res.send(allPosts);
   } catch (err) {
     console.log('Error getting all posts: ' + err);

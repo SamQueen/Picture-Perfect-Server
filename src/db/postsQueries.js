@@ -106,8 +106,27 @@ const createPost = async(userId, imageUrl, caption) => {
     }
 }
 
+const deletePost = async(id) => {
+    const query = `DELETE FROM database2.posts WHERE id = ?`;
+
+    try {
+        const response = await pool.query(query, [id]);
+
+        return ({
+            status: 'success',
+            message: 'Post deleted'
+        })
+    } catch (err) {
+        return ({
+            status: 'error',
+            message: err
+        })
+    }
+}
+
 module.exports = {
     getAllPosts,
     getPostsById,
     createPost,
+    deletePost,
 }

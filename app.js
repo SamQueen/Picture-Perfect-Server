@@ -10,6 +10,7 @@ const postsRoute = require('./src/routes/getPostsById');
 const likesRoute = require('./src/routes/like');
 const editProfileRoute = require('./src/routes/editProfile');
 const createPostRoute = require('./src/routes/createPost');
+const deletePostRoute = require('./src/routes/deletePost');
 
 const app = express()
 const port = 5000
@@ -35,6 +36,7 @@ app.use('/', postsRoute);
 app.use('/', likesRoute);
 app.use('/', createPostRoute);
 app.use('/', editProfileRoute);
+app.use('/', deletePostRoute);
 
 app.get('/', (req, res) => {
   res.send('Hello World!')

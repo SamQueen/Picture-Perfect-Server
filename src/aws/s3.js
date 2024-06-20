@@ -13,6 +13,7 @@ const s3 = new S3({
     region,
     accessKeyId,
     secretAccessKey,
+    s3ForcePathStyle: true
 });
 
 // uplpoads file to s3
