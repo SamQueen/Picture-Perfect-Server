@@ -28,15 +28,16 @@ router.post('/login', async (req, res) => {
         if (password == dbPassowrd) {
             const user = { user_id: results[0].id }
             const accessToken = jwt.sign(user, process.env.ACCESS_TOKEN_SECRET);
+            const isProduction = process.env.NODE_ENV === "production";
 
             // Set the token as a cookie
             res.cookie('access_token', accessToken, {
                 httpOnly: true,
-                //secure: true,
-                secure: 'production', // Ensure the cookie is sent over HTTPS in production
-                sameSite: 'None', // Set SameSite attribute
+                secure: isProduction, // Ensure the cookie is sent over HTTPS in production
+                sameSite: isProduction ? 'None' : "Lax", // Set SameSite attribute
                 maxAge: 3600000, // 1 hour
-                path: '/'
+                path: '/',
+                domain: 'https://limitless-gorge-84901-46983064217d.herokuapp.com/',
             });
 
             return res.status(200).json({ message: 'login successful' });
