@@ -24,6 +24,7 @@ const pool = mysql.createPool({
     user: process.env.CLEARDB_USERNAME,
     database: 'heroku_52f7453ae4271ef',
     password: process.env.CLEARDB_PASSWORD,
+    port: 3060,
     waitForConnections: true,
     connectionLimit: 3,
     maxIdle: 3, // max idle connections, the default value is the same as `connectionLimit`
