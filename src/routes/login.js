@@ -30,6 +30,9 @@ router.post('/login', async (req, res) => {
             const accessToken = jwt.sign(user, process.env.ACCESS_TOKEN_SECRET);
             const isProduction = process.env.NODE_ENV === "production";
 
+            if (isProduction)
+                console.log('in production')
+
             // Set the token as a cookie
             res.cookie('access_token', accessToken, {
                 httpOnly: true,
