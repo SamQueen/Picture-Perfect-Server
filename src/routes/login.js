@@ -32,7 +32,7 @@ router.post('/login', async (req, res) => {
             // Set the token as a cookie
             res.cookie('access_token', accessToken, {
                 httpOnly: true,
-                secure: false,
+                secure: true,
                 //secure: process.env.NODE_ENV === 'production', // Ensure the cookie is sent over HTTPS in production
                 sameSite: 'None', // Set SameSite attribute
                 maxAge: 3600000, // 1 hour
