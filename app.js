@@ -15,9 +15,11 @@ const deletePostRoute = require('./src/routes/deletePost');
 const app = express()
 const port = process.env.PORT || 5000;
 
+const isProduction = process.env.NODE_ENV === "production";
+
 // Allow all origins (not recommended for production)
 app.use(cors({
-    origin : "http://localhost:3000",
+    origin : isProduction ? "https://picture-this-client-8ed1b3b712de.herokuapp.com" : "http://localhost:3000",
     credentials: true,
 }));
 
