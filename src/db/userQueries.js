@@ -10,7 +10,7 @@ const pool = require('../db/connection');
 const createUser = async(username, firstName, lastName, email, password) => {
     const date = new Date();
     const defaultProfilePath = 'defaultProfile.jpg';
-    const query = `INSERT INTO database2.users(username, first_name, last_name, email, password, profile_picture, role, status, created_at)
+    const query = `INSERT INTO users(username, first_name, last_name, email, password, profile_picture, role, status, created_at)
     VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?);`;
 
     try {
@@ -48,7 +48,7 @@ const getUserById = async(id) => {
     try {
         const [rows] = await pool.query(`
             SELECT id, username, first_name, last_name, email, profile_picture, role, status, created_at
-            FROM database2.users
+            FROM users
             WHERE id = ?;
         `, [id]);
 
@@ -60,7 +60,7 @@ const getUserById = async(id) => {
 }
 
 const updateProfilePhoto = async(id, url) => {
-    const query = `UPDATE database2.users
+    const query = `UPDATE users
                     SET profile_picture=?
                     WHERE id=?`;
     

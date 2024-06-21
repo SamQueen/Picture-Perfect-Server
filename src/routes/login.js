@@ -15,7 +15,7 @@ router.post('/login', async (req, res) => {
 
     try {
         const [results] = await pool.query(
-            "SELECT id, password FROM database2.users WHERE email = ?", [email]
+            "SELECT id, password FROM users WHERE email = ?", [email]
         );
 
         // if user not found in database

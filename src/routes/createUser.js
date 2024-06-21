@@ -10,19 +10,33 @@ router.post('/createUser', async (req, res) => {
     const lastName = req.body.lastName;
     const password = req.body.password;
 
+    // validate input
+    if(!username || !email || !firstName || !lastName || !password) {
+        return res.status(400).json({ 
+            status: 'error', 
+            message: validationError 
+        });
+    }
+
     try {
         const result = await createUser(username, firstName, lastName, email, password)
         
         if (result.status === 'error') {
-            return res.json(result).status(result.status);
+            console.error("Error creating new user: ", result.message);
+            
+            return res.status(500).json({ 
+                message: result.message, 
+            });
         }
         
-        res.json(result).status(200);
-    } catch {
+        return res.status(200).json({ 
+            message: 'success', 
+        });
+    } catch(err) {
+        console.error("Error creating new user: ", err);
+
         return res.status(500).json({ 
-            status: 'error', 
             message: 'Server error', 
-            error: err.message 
         });
     }
 });

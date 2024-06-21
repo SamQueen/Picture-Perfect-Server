@@ -6,10 +6,10 @@ const pool = require('../db/connection');
 router.post('/like' , async (req, res) => {
     const userId = req.body.user_id;
     const postId = req.body.post_id;
-    const query1 = `SELECT * FROM database2.likes
+    const query1 = `SELECT * FROM likes
                     WHERE user_id = ?
                     AND post_id = ?;`;
-    const query2 = `INSERT INTO database2.likes(user_id, post_id)
+    const query2 = `INSERT INTO likes(user_id, post_id)
                     VALUES ( ?, ?);`
 
     try {
@@ -32,7 +32,7 @@ router.post('/like' , async (req, res) => {
 router.post('/unlike' , async (req, res) => {
     const userId = req.body.user_id;
     const postId = req.body.post_id;
-    const query1 = `DELETE FROM database2.likes
+    const query1 = `DELETE FROM likes
                     WHERE user_id = ?
                     AND post_id = ?;`;
 

@@ -10,10 +10,10 @@ const getAllPosts = async(id) => {
                     posts.caption,
                     posts.date, 
                     posts.image, COUNT(likes.id) AS like_count
-                FROM database2.posts AS posts
-                LEFT JOIN database2.likes AS likes
+                FROM posts AS posts
+                LEFT JOIN likes AS likes
                 ON posts.id = likes.post_id
-                LEFT JOIN database2.users AS users
+                LEFT JOIN users AS users
                 ON posts.user_id = users.id
                 GROUP BY posts.id, posts.caption, posts.date
                 ORDER BY like_count DESC;`;
@@ -34,9 +34,9 @@ const getAllPosts = async(id) => {
                         WHEN likes.user_id = ? THEN TRUE
                         ELSE FALSE
                     END) AS is_liked
-                    FROM database2.posts AS posts
-                    LEFT JOIN database2.likes AS likes ON posts.id = likes.post_id
-                    LEFT JOIN database2.users AS users ON posts.user_id = users.id
+                    FROM posts AS posts
+                    LEFT JOIN likes AS likes ON posts.id = likes.post_id
+                    LEFT JOIN users AS users ON posts.user_id = users.id
                     GROUP BY 
                     users.profile_picture, 
                     users.first_name, 
@@ -65,7 +65,7 @@ const getAllPosts = async(id) => {
  * @returns {Promise<Array>} A promise that resolves to an array of user records.
  **/
 const getPostsById = async(id) => {
-    const query = `SELECT * FROM database2.posts
+    const query = `SELECT * FROM posts
                    WHERE user_id = ?;`
     
     try {
@@ -85,7 +85,7 @@ const getPostsById = async(id) => {
 }
 
 const createPost = async(userId, imageUrl, caption) => {
-    const query = `INSERT INTO database2.posts (user_id, image, caption, date)
+    const query = `INSERT INTO posts (user_id, image, caption, date)
                     VALUES(?, ?, ?, now());`;
 
     try {
@@ -107,7 +107,7 @@ const createPost = async(userId, imageUrl, caption) => {
 }
 
 const deletePost = async(id) => {
-    const query = `DELETE FROM database2.posts WHERE id = ?`;
+    const query = `DELETE FROM posts WHERE id = ?`;
 
     try {
         const response = await pool.query(query, [id]);
