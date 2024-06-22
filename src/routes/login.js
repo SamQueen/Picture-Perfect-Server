@@ -39,7 +39,8 @@ router.post('/login', async (req, res) => {
                 secure: isProduction, // Ensure the cookie is sent over HTTPS in production
                 sameSite: isProduction ? 'None' : "Lax", // Set SameSite attribute
                 maxAge: 3600000, // 1 hour
-                domain: isProduction ? 'heroku.com' : undefined,
+                path: '/',
+                domain: isProduction ? '.heroku.com' : undefined,
             });
 
             return res.status(200).json({ message: 'login successful' });
