@@ -35,10 +35,11 @@ router.post('/login', async (req, res) => {
 
             // Set the token as a cookie
             res.cookie('access_token', accessToken, {
-                httpOnly: false, // Make cookies inaccesible to Javascript on client side
-                secure: false, // Ensure the cookie is sent over HTTPS in production
-                sameSite: "Lax", // Set SameSite attribute
+                httpOnly: true, // Make cookies inaccesible to Javascript on client side
+                secure: isProduction, // Ensure the cookie is sent over HTTPS in production
+                sameSite: isProduction ? 'None' : "Lax", // Set SameSite attribute
                 maxAge: 3600000, // 1 hour
+                domain: isProduction ? 'heroku.com' : undefined,
             });
 
             return res.status(200).json({ message: 'login successful' });
