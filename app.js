@@ -19,7 +19,7 @@ const isProduction = process.env.NODE_ENV === "production";
 
 // Allow all origins (not recommended for production)
 app.use(cors({
-    origin : isProduction ? "https://picture-this-client-8ed1b3b712de.herokuapp.com" : "http://localhost:3000",
+    origin : isProduction ? "https://www.pictureper.com" : "http://localhost:3000",
     credentials: true,
 }));
 
