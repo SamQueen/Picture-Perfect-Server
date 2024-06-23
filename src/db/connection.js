@@ -3,8 +3,8 @@ const mysql = require('mysql2/promise');
 require('dotenv').config();
 
 // local testing connection
-/* const pool = mysql.createPool({
-    host: 'mysql://b9f4abbb22f7c7:fbf1d34a@us-cluster-east-01.k8s.cleardb.net/heroku_52f7453ae4271ef?reconnect=true',
+const pool = mysql.createPool({
+    host: 'localhost',
     user: 'root',
     database: 'database2',
     password: '5121',
@@ -16,10 +16,10 @@ require('dotenv').config();
     enableKeepAlive: true,
     keepAliveInitialDelay: 0,
 });
- */
+
 
 // production connection
-const pool = mysql.createPool({
+/* const pool = mysql.createPool({
     host: process.env.CLEARDB_HOSTNAME,
     user: process.env.CLEARDB_USERNAME,
     database: 'heroku_52f7453ae4271ef',
@@ -32,6 +32,6 @@ const pool = mysql.createPool({
     queueLimit: 0,
     enableKeepAlive: true,
     keepAliveInitialDelay: 0,
-});
+}); */
 
 module.exports = pool;

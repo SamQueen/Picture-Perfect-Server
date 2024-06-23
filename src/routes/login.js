@@ -8,7 +8,7 @@ const pool = require('../db/connection');
 router.post('/login', async (req, res) => {
     const email = req.body.email;
     const password = req.body.password;
-    console.log(email)
+    
     if (!email || !password) {
         return res.status(403).json({ message: "Email or password missing!" }); 
     }
@@ -42,10 +42,6 @@ router.post('/login', async (req, res) => {
                 path: '/',
                 domain: isProduction ? '.pictureper.com' : undefined,
             });
-
-            console.log('sending cookie')
-            console.log(res)
-
 
             return res.status(200).json({ message: 'login successful' });
         }
