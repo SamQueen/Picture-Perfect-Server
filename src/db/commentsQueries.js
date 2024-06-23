@@ -28,7 +28,7 @@ const getComments = async(postId) => {
 }
 
 const addComment = async(postId, content, userId) => {
-    const query = `INSERT INTO database2.comments(user_id, post_id, parent_id, content, created_at)
+    const query = `INSERT INTO comments(user_id, post_id, parent_id, content, created_at)
                     VALUES(?, ?, null, ?, now());`
 
     try {
