@@ -12,10 +12,10 @@ const parseComments = (comments) => {
         // if comment already in array then add reply
         if (commentWithReplies.some(comment => comment.id === comments[i].id)) {
             let reply = {
-                'id': comments[i].id,
-                'content': comments[i].content,
-                'username': comments[i].username,
-                'profilePic': comments[i].profile_picture,
+                'id': comments[i].reply_id,
+                'content': comments[i].reply_content,
+                'username': comments[i].reply_username,
+                'profilePic': comments[i].reply_profile_picture,
             }
             
             let comment = commentWithReplies.find(comment => comment.id === comments[i].id)

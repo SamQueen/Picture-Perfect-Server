@@ -19,7 +19,7 @@ const getComments = async(postId) => {
     try {
         const [rows] = await pool.query(query, [postId]);
         const parsedComments = parseComments(rows);
-        
+
         return parsedComments;
     } catch(err) {
         console.error(`Error getting user by ID from database: ${err.message}`);
@@ -27,12 +27,12 @@ const getComments = async(postId) => {
     }
 }
 
-const addComment = async(postId, content, userId) => {
+const addComment = async(postId, content, userId, parentId) => {
     const query = `INSERT INTO comments(user_id, post_id, parent_id, content, created_at)
-                    VALUES(?, ?, null, ?, now());`
+                    VALUES(?, ?, ?, ?, now());`
 
     try {
-        await pool.query(query, [userId, postId, content]);
+        await pool.query(query, [userId, postId, parentId, content]);
 
         return {
             status: 'success',

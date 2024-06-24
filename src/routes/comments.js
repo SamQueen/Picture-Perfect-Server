@@ -20,18 +20,17 @@ router.post('/addComment' , async (req, res) => {
     const postId = req.body.postId;
     const content = req.body.content;
     const userId = req.body.userId;
-
-    console.log(postId);
-    console.log(content);
-    console.log(userId);
+    const parentId= req.body.parentId;
 
     try {
-        const result = await addComment(postId, content, userId);
+        const result = await addComment(postId, content, userId, parentId);
+
+        return res.status(200).json({ message: 'success' })
     } catch (err) {
         console.error('Error adding comment: ' + err)
-    }
 
-    return res.status(200).json({ message: 'success' })
+        return res.status(500).json({ message: 'Error adding comment' })
+    }
 });
 
 module.exports = router;
