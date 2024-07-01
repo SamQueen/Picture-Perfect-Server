@@ -82,8 +82,31 @@ const updateProfilePhoto = async(id, url) => {
     }
 }
 
+const getAllUsers = async(input) => {
+    const query = `SELECT id, username, profile_picture AS profilePhoto 
+                    FROM users
+                    WHERE username LIKE ?;`;
+
+    try {
+        const [rows] = await pool.query(query, [`%${input}%`]);
+
+        return {
+            status: 'success',
+            data: rows,
+        }
+    } catch(err) {
+        console.error('Error getting all users from database: ', err);
+
+        return {
+            status: 'error',
+            message: err,
+        }
+    }
+}
+
 module.exports = {
     createUser,
     getUserById,
-    updateProfilePhoto
+    updateProfilePhoto,
+    getAllUsers
 }
