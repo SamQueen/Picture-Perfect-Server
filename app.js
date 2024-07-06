@@ -28,7 +28,7 @@ const isProduction = process.env.NODE_ENV === "production";
 
 const io = new Server(server, {
     cors: {
-        origin: "http://localhost:3000"
+        origin : isProduction ? "https://www.pictureper.com" : "http://localhost:3000",
     }
 });
 
