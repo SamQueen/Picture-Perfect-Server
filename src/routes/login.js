@@ -40,7 +40,7 @@ router.post('/login', async (req, res) => {
                 sameSite: isProduction ? 'None' : "Lax", // Set SameSite attribute
                 maxAge: 3600000, // 1 hour
                 path: '/',
-                domain: isProduction ? '.pictureper.com' : undefined,
+                domain: isProduction ? 'api.pictureper.com' : undefined,
             });
 
             return res.status(200).json({ message: 'login successful' });
