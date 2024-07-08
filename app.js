@@ -103,6 +103,11 @@ server.listen(port, () => {
     console.log(`App listening on port ${port}`)
 });
 
+app.post('/logout', (req, res) => {
+    console.log('logging out');
+    res.clearCookie('access_token');
+    return res.status(200).json({ message: 'success' });
+});
 
 // handle server shutdown
 process.on('SIGTERM', () => {
