@@ -104,8 +104,9 @@ server.listen(port, () => {
 });
 
 app.post('/logout', (req, res) => {
-    console.log('logging out');
-    res.clearCookie('access_token');
+    // force cookie to expire immediately
+    res.setHeader('Set-Cookie', 'access_token=; Path=/; Expires=Thu, 01 Jan 1970 00:00:00 GMT;');
+
     return res.status(200).json({ message: 'success' });
 });
 
