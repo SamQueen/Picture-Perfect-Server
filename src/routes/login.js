@@ -35,9 +35,9 @@ router.post('/login', async (req, res) => {
 
             // Set the token as a cookie
             res.cookie('access_token', accessToken, {
-                httpOnly: true, // Make cookies inaccesible to Javascript on client side
+                httpOnly: false, // Make cookies inaccesible to Javascript on client side
                 secure: isProduction, // Ensure the cookie is sent over HTTPS in production
-                sameSite: 'lax',//isProduction ? 'None' : "Lax", // Set SameSite attribute
+                sameSite: isProduction ? 'None' : "Lax", // Set SameSite attribute
                 maxAge: 3600000, // 1 hour
                 path: '/',
                 domain: isProduction ? '.pictureper.com' : undefined,
